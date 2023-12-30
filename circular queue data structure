@@ -1,0 +1,85 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define size 10
+void insertcq(int);
+void deletecq();
+void display();
+int cq[size];
+int front=0;
+int rear=0;
+int count=0;
+int main()
+{
+    int value,choice=0;
+    while(1)
+    {
+        printf("\nMain manu\n");
+        printf("1.Insert\n2.Delete\n3.display\n4.exit\n");
+        printf("Enter your choice:");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+            printf("Enter the element to be insert:");
+            scanf("%d",&value);
+            insertcq(value);
+            break;
+            case 2:
+            deletecq();
+            break;
+            case 3:
+            display();
+            break;
+            case 4:
+            exit(0);
+            break;
+            default:
+            printf("Enter your invalid choice\n");
+        }
+    }
+}
+void insertcq(int value)
+{
+    if(count==size)
+    {
+        printf("Circular queue is full\n");
+    }
+    else
+    {
+        cq[rear]=value;
+        rear=(rear+1)%size;
+        count++;
+        printf("Data inserted in the circular queue\n");
+    }
+}
+void deletecq()
+{
+    if(count==0)
+    {
+        printf("Circular queue is empty\n");
+    }
+    else
+    {
+        printf("Deleted element from circular queue\n");
+        front=(front+1)%size;
+        count--;
+    }
+}
+void display()
+{
+    int i,j;
+    if(count==0)
+    {
+        printf("Circular queue is empty\n");
+    }
+    else
+    {
+        printf("Elements in the circular queue\n");
+        j=count;
+        for(i=front;j!=0;j--)
+        {
+            printf("%d\n",cq[i]);
+            i=(i+1)%size;
+        }
+    }
+}
